@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 import { test } from './fixtures';
+import { ComponentWithAsset } from '../components/ComponentWithAsset';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -10,6 +11,11 @@ Given('Mounted input component', async ({ mount }) => {
   // see: https://github.com/microsoft/playwright/issues/28566
   await mount(<textarea data-testid="textField" />);
 });
+
+Given('Mounted component with asset imported', async ({mount}) => {
+  await mount(<ComponentWithAsset />);
+});
+
 
 When('I type {string}', async ({ page }, arg: string) => {
   await page.getByTestId('textField').fill(arg);
